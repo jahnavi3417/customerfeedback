@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container jumbotron ">
+    <div>
+    <div class="col-md-5 offset-md-2">
+        <h3 class="text-success offset-md-4"><b>Register</b></h3>
+        <br>
+        <form action="{% url 'register' %}" method="post">
+            {% csrf_token %}
+
+            <br>
+            <label for="">User Name</label>
+            <input type="text" name="username" id="username" class="form-control" placeholder="User name" required autocomplete="off">
+            <br>
+            <label for="">Email</label>
+            <input type="Email" name="Email" id="Email" class="form-control" placeholder="abc@gmail.com" required autocomplete="off">
+            <br>
+            <label for="">Password</label>
+            <input type="password" name="Password" id="password" class="form-control" placeholder="Password" required autocomplete="off">
+            <br>
+            <label for="">Confirm Password</label>
+            <input type="password" name="Password2" id="password2" class="form-control" placeholder="Confirm password" required autocomplete="off">
+            <br><br>
+            <input type="submit" class="btn btn-success offset-md-5" value="Register">
+        </form>
+    </div>
+    </div>
+    
+</div>
+
+
+{% endblock %}

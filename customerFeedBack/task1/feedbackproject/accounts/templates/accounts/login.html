@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container jumbotron">
+    <div class="col-md-5 offset-md-3">
+        <h3 class="text-success offset-md-5"><b>Login</b></h3>
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <label for="">Username</label>
+            <input type="text" name="username" id="username" class="form-control" placeholder='Username' required>
+            <br>
+            <label for="">Password</label>
+            <input type="password" name="Password" id="password" class="form-control" placeholder="Password" required>
+            <br>
+            <input type="submit" value="Login" class="btn btn-md btn-success offset-md-5">
+            <br><br>
+            <h5 class="offset-md-4">Not a memeber &nbsp; &nbsp;<a href="{% url 'register' %}" >Register</a></h5>
+            </form>
+    </div>
+</div>
+
+{% endblock %}

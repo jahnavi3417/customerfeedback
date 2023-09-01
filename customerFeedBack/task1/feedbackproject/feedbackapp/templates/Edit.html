@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>feedback </h3>
+<form action="" method="post" , enctype="multipart/form-data">
+    <!-- feedback_form.html -->
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Feedback</button>
+    </form>
+
+
+
+
+
+
+
+
+{% endblock %}
+   

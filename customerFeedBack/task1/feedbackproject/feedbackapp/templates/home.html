@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- Include the Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    * {
+    margin: 0;
+    padding: 0;
+}
+.rating-css div {
+    color: #ffe400;
+    font-weight: 800;
+}
+
+.rating-css input {
+    display: none;
+}
+
+.rating-css input+label {
+
+    cursor: pointer;
+}
+
+.rating-css input:checked+label~label {
+    color: #828282;
+}
+
+.rating-css label:active {
+    transform: scale(0.8);
+    transition: 0.3s ease;
+}
+  </style>
+   
+   
+    <div class="container">
+        <div class="row justify-content-center m-4">
+            <a href="{% url 'add' %}">addfeedback</a>
+            <ul>
+                {% if show %}
+                    {% for entry in show %}
+                        <li>
+                        
+                            <div class="card m-2" style="width: 18rem;">
+                                <div class="card-body">
+                                    <strong class="card-title">Name:</strong> {{ entry.name }}<br>
+                                    <strong class="card-text">Message:</strong> {{ entry.message }}<br>
+                                    
+                                    <span class="like-button" id="like" onclick="toggleLike(this)">
+                                        <i class="far fa-thumbs-up"></i>
+                                    </span>&nbsp;
+                                
+                                    <span class="like-button" id="dislike" onclick="toggleDislike(this)">
+                                        <i class="far fa-thumbs-down"></i>
+                                    </span>
+                                    <div class="rating-css">
+                                        <div class="star-icon">
+                                            <input type="radio" name="rating{{ entry.id }}" id="rating1_{{ entry.id }}">
+                                            <label for="rating1_{{ entry.id }}" class="fa fa-star"></label>
+                                            <input type="radio" name="rating{{ entry.id }}" id="rating2_{{ entry.id }}">
+                                            <label for="rating2_{{ entry.id }}" class="fa fa-star"></label>
+                                            <input type="radio" name="rating{{ entry.id }}" id="rating3_{{ entry.id }}">
+                                            <label for="rating3_{{ entry.id }}" class="fa fa-star"></label>
+                                            <input type="radio" name="rating{{ entry.id }}" id="rating4_{{ entry.id }}">
+                                            <label for="rating4_{{ entry.id }}" class="fa fa-star"></label>
+                                            <input type="radio" name="rating{{ entry.id }}" id="rating5_{{ entry.id }}">
+                                            <label for="rating5_{{ entry.id }}" class="fa fa-star"></label>
+                                            <br>
+                                            <a href="{% url 'edit' entry.pk %}" >edit</a>
+                                        
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <p>No entries to show.</p>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+<script>
+
+
+function toggleLike(button) {
+        const likeIcon = button.querySelector('i');
+        if (likeIcon.classList.contains('far')) {
+            likeIcon.classList.remove('far');
+            likeIcon.classList.add('fas', 'liked');
+            button.style.color = 'blue';  // Change the color for the "liked" state
+        } else {
+            likeIcon.classList.remove('fas', 'liked');
+            likeIcon.classList.add('far');
+            button.style.color = '#838383';  
+    }
+   
+}
+    function toggleDislike(button) {
+        const likeIcon = button.querySelector('i');
+        if (likeIcon.classList.contains('far')) {
+            likeIcon.classList.remove('far');
+            likeIcon.classList.add('fas', 'liked');
+            button.style.color = 'red';  // Change the color for the "liked" state
+        } else {
+            likeIcon.classList.remove('fas', 'liked');
+            likeIcon.classList.add('far');
+            button.style.color = '#838383';  
+    }
+   
+
+
+       
+        }
+        const starIcons = document.querySelectorAll('.star-icon label');
+
+        starIcons.forEach((star, index) => {
+            star.addEventListener('click', () => {
+                const selectedRating = index + 1;
+                console.log(`User selected rating: ${selectedRating}`);
+                // Additional logic to update the appearance of the stars
+            });
+        });
+    </script>
+{% endblock %}
+
+
+
